@@ -1,0 +1,26 @@
+version: '3'
+services:
+        laravel:
+                image: abhishekk27/laravel-new
+                container_name: laravel
+                ports:
+                    - 3344:80
+                      # network_mode: pkms
+                restart: always
+                volumes:
+                    - ./codebase:/var/www/html/laravel
+        db:
+                image: mysql:5.7.22
+                container_name: db
+                restart: unless-stopped
+                tty: true
+                ports:
+                   - "3306:3306"
+                environment:
+                   MYSQL_ROOT_PASSWORD: gosolar1
+                volumes:
+                   - dbdata:/var/lib/mysql/
+volumes:
+  laravel_data:
+  dbdata:
+    driver: local
